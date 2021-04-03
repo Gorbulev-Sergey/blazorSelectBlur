@@ -1,0 +1,58 @@
+﻿
+
+<div class="text-white mt-3">
+    <p class="p-4" style="background:rgba(@editor.color.r, @editor.color.g, @editor.color.b, @editor.color.opacity.ToString().Replace(",", "."));
+backdrop-filter:blur(@String.Format("{0}px",editor.blur));
+border-radius:@Radius;
+box-shadow:@String.Format("{0}px",editor.shadow.x) @String.Format("{0}px",editor.shadow.y) @String.Format("{0}px", editor.shadow.radius) rgba(@editor.shadow.color.r,@editor.shadow.color.g,@editor.shadow.color.b,@editor.shadow.color.opacity.ToString().Replace(",","."))">Привет, мир</p>
+    <div class="btn-group mr-2 mb-2">
+        <label class="btn btn-light m-0" style="border-radius:@Radius 0 0 @Radius">Цвет</label>
+        <input class="btn btn-dark" type="number" @bind="editor.color.r" @bind:event="oninput" min="0" max="255" />
+        <input class="btn btn-dark" type="number" @bind="editor.color.g" @bind:event="oninput" min="0" max="255" />
+        <input class="btn btn-dark" type="number" @bind="editor.color.b" @bind:event="oninput" min="0" max="255" style="border-radius:0 @Radius @Radius 0" />
+    </div>
+    <div class="btn-group mr-2 mb-2">
+        <label class="btn btn-light m-0" style="border-radius:@Radius 0 0 @Radius">Прозрачность</label>
+        <input class="btn btn-dark" type="number" @bind="editor.color.opacity" @bind:event="oninput" min="0" max="1" step=".01" style="border-radius:0 @Radius @Radius 0" />
+    </div>
+    <div class="btn-group mr-2 mb-2">
+        <label class="btn btn-light m-0" style="border-radius:@Radius 0 0 @Radius">Blur</label>
+        <input class="btn btn-dark" type="number" @bind="editor.blur" @bind:event="oninput" min="0" style="width:5em" />
+        <label class="btn btn-light m-0" style="border-radius:0 @Radius @Radius 0">px</label>
+    </div>
+    <div class="btn-group mr-2 mb-2">
+        <label class="btn btn-light m-0" style="border-radius:@Radius 0 0 @Radius">Border radius</label>
+        <input class="btn btn-dark" type="number" @bind="editor.border_radius" @bind:event="oninput" min="0" step=".01" style="width:5em" />
+        <label class="btn btn-light m-0" style="border-radius:0 @Radius @Radius 0">em</label>
+    </div>
+
+    <div class="btn-group mr-2 mb-2">
+        <label class="btn btn-light m-0" style="border-radius:@Radius 0 0 @Radius">Тень</label>
+        <input class="btn btn-dark" type="number" @bind="editor.shadow.x" @bind:event="oninput"  style="width:5em"/>
+        <input class="btn btn-dark" type="number" @bind="editor.shadow.y" @bind:event="oninput" style="width:5em" />
+        <input class="btn btn-dark" type="number" @bind="editor.shadow.blur" @bind:event="oninput" min="0" style="width:5em" />
+        <input class="btn btn-dark" type="number" @bind="editor.shadow.radius" @bind:event="oninput" style="width:5em" />
+    </div>
+
+    <div class="btn-group mr-2 mb-2">
+        <label class="btn btn-light m-0">Цвет тени</label>
+        <input class="btn btn-dark" type="number" @bind="editor.shadow.color.r" @bind:event="oninput" min="0" max="255" style="width:5em" />
+        <input class="btn btn-dark" type="number" @bind="editor.shadow.color.g" @bind:event="oninput" min="0" max="255" style="width:5em" />
+        <input class="btn btn-dark" type="number" @bind="editor.shadow.color.b" @bind:event="oninput" min="0" max="255" style="width:5em" />
+        <input class="btn btn-dark" type="number" @bind="editor.shadow.color.opacity" @bind:event="oninput" min="0" max="1" step=".01" style="border-radius:0 @Radius @Radius 0; width:5em" />
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public editor editor { get; set; } = new editor();
+    string Radius
+    {
+        get => editor.border_radius.ToString().Replace(",", ".") + "em";
+        set
+        {
+            editor.border_radius = double.Parse(value);
+        }
+    }
+}

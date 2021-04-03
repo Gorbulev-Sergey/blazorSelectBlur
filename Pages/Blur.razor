@@ -1,0 +1,21 @@
+﻿@page "/"
+@page "/mypage"
+@attribute [Authorize]
+
+
+<div class="container text-white mb-3" style="display:flex; justify-content:space-between; align-items:center">
+    @*<h5>Выберите цвет</h5>*@
+    <button class="btn btn-light" @onclick="()=>editors.Add(new editor())">Добавить цвет</button>
+</div>
+<div class="container">
+    <div style="display:flex; justify-content:center; align-items:center; flex-direction:column">
+        @foreach (var editor in editors)
+        {
+            <BlureEditor editor="editor"></BlureEditor>
+        }
+    </div>
+</div>
+
+@code {
+    List<editor> editors = new List<editor>();
+}
